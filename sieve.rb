@@ -5,7 +5,7 @@ class Sieve
     range = create_range(limit)
     self.primes = [2]
     limit.times do
-      range = range.select { |x| x % primes.last != 0 }
+      range = remove_multiple(primes.last, range)
       primes.push(range.first) if range.first != nil
     end
   end
@@ -15,7 +15,7 @@ class Sieve
   end
 
   def remove_multiple(prime, range)
-    range.select { |x| x % prime  == 0 }
+    range.select { |x| x % prime  != 0 }
   end
 
 end
